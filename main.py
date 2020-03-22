@@ -74,7 +74,7 @@ def items_diff(current: dict, previous: dict):
     return diff
 
 
-def return_changes_and_sales(soup: bs4.BeautifulSoup) -> dict:
+def changes_and_sales(soup: bs4.BeautifulSoup) -> dict:
     current_items = get_items(soup)
     previous_items = open_json(ITEMS_JSON)
     # save_json(current_items, ITEMS_JSON)
@@ -91,7 +91,7 @@ def main():
     content = get_content(URL)
     if content is not None:
         soup = cook_soup(content)
-        x = return_changes_and_sales(soup)
+        x = changes_and_sales(soup)
         print(x)
 
 
