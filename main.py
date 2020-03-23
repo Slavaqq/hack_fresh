@@ -77,10 +77,8 @@ def items_diff(current: dict, previous: dict):
 def changes_and_sales(soup: bs4.BeautifulSoup) -> dict:
     current_items = get_items(soup)
     previous_items = open_json(ITEMS_JSON)
-    # save_json(current_items, ITEMS_JSON)
+    save_json(current_items, ITEMS_JSON)
     result = {"changes": {}, "sales": {}}
-    if current_items == previous_items:
-       return result
     result["changes"] = items_diff(current_items, previous_items)
     if is_on_sale(soup):
         result["sales"] = get_sale_items(soup)
