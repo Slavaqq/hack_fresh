@@ -1,9 +1,9 @@
 from typing import Dict, List, Union
 
-import requests
 import bs4
+import cachetools
+import requests
 
-URL = "https://my.freshpoint.cz/device/product-list/60"
 NO_SALE = "0%"
 
 
@@ -54,16 +54,9 @@ def get_sale(tr: bs4.element.Tag) -> str:
         return NO_SALE
 
 
+@cachetools.cached(cache=cachetools.TTLCache(maxsize=1024, ttl=60))
 def scrap(url: str) -> List[Dict[str, Union[str, int]]]:
     content = get_content(url)
     soup = cook_soup(content)
-    current_items = get_items(soup)
-    return current_items
+    return get_items(soup)
 
-
-def main() -> None:
-    print(scrap(URL))
-
-
-if __name__ == "__main__":
-    main()
