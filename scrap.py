@@ -59,4 +59,3 @@ def scrap(url: str) -> List[Dict[str, Union[str, int]]]:
     content = get_content(url)
     soup = cook_soup(content)
     return get_items(soup)
-

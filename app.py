@@ -10,14 +10,12 @@ MIN_SALE = 5
 
 
 class All:
-
     def on_get(self, request, response):
         search = request.get_param("search")
         response.body = json.dumps(index(URL, search), ensure_ascii=False, indent=2)
 
 
 class Sale:
-    
     def on_get(self, request, response):
         min_sale = request.get_param("min_sale")
         try:
